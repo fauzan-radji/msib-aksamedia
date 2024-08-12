@@ -1,27 +1,42 @@
+import { AlertContainer, Header, Input, PrimaryButton } from "@/components";
 import {
   ArrowRightEndOnRectangleIcon,
   LockClosedIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { Header, Input, PrimaryButton } from "@/components";
+import { useReducer, useRef } from "react";
 
-import { useRef } from "react";
+import { ACTION } from "@/enums";
+import { Navigate } from "react-router-dom";
+import { alert as alertReducer } from "@/reducers";
+import { useAuth } from "@/context";
 
 export default function Login() {
+  const { isLoggedIn, login } = useAuth();
+  const [alerts, alertsDispatch] = useReducer(alertReducer, []);
   const usernameInput = useRef();
   const passwordInput = useRef();
 
-  function onInputError(error) {
-    // TODO: show error message with toast
-    console.log(error);
+  function handleSubmit(e) {
+    e.preventDefault();
+    const error = login(
+      usernameInput.current.value,
+      passwordInput.current.value,
+    );
+    if (error) {
+      alertsDispatch({
+        type: ACTION.ERROR_PUSH,
+        payload: error,
+      });
+    }
   }
 
-  function handleSubmit() {
-    // TODO: handle form submission
-  }
+  if (isLoggedIn) return <Navigate to="/" replace={true} />;
 
   return (
     <div className="flex h-full flex-col items-center justify-center px-6 py-4">
+      <AlertContainer alerts={alerts} dispatch={alertsDispatch} />
+
       <Header>Login</Header>
       <form
         onSubmit={handleSubmit}
@@ -38,7 +53,6 @@ export default function Login() {
 
             return "";
           }}
-          onInputError={onInputError}
         >
           <UserIcon className="h-4 w-4" />
         </Input>
@@ -55,7 +69,6 @@ export default function Login() {
 
             return "";
           }}
-          onInputError={onInputError}
         >
           <LockClosedIcon className="h-4 w-4" />
         </Input>

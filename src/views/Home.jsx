@@ -2,9 +2,14 @@ import { Card, Pagination, SecondaryButton } from "@/components";
 import { MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useMemo, useState } from "react";
 
+import { Navigate } from "react-router-dom";
+import { useAuth } from "@/context";
+
 const perPage = 12;
 
 export default function Home() {
+  const { isLoggedIn } = useAuth();
+
   function handleChange(event) {
     // TODO: filter notes
     console.log(event.target.value);
@@ -18,6 +23,8 @@ export default function Home() {
     const end = start + perPage;
     return notes.slice(start, end);
   }, [page, notes]);
+
+  if (!isLoggedIn) return <Navigate to="/login" replace={true} />;
 
   return (
     <div className="flex h-full flex-col gap-4">

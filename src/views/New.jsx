@@ -5,19 +5,20 @@ import {
 } from "@heroicons/react/24/outline";
 import { Input, PrimaryButton } from "@/components";
 
+import { Navigate } from "react-router-dom";
+import { useAuth } from "@/context";
 import { useRef } from "react";
 
 export default function New() {
+  const { isLoggedIn } = useAuth();
   const titleInput = useRef();
   const contentInput = useRef();
 
-  function onInputError(error) {
-    // TODO: show error message with toast
-    console.log(error);
-  }
   function handleSubmit() {
     // TODO: save note
   }
+
+  if (!isLoggedIn) return <Navigate to="/login" replace={true} />;
 
   return (
     <form
@@ -35,7 +36,6 @@ export default function New() {
 
           return "";
         }}
-        onInputError={onInputError}
       >
         <PencilSquareIcon className="h-4 w-4" />
       </Input>
@@ -45,7 +45,6 @@ export default function New() {
         type="textarea"
         placeholder="Content"
         validate={() => ""}
-        onInputError={onInputError}
       >
         <Bars3BottomLeftIcon className="h-4 w-4" />
       </Input>
