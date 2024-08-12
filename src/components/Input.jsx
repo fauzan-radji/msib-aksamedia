@@ -1,6 +1,7 @@
 import { forwardRef, useId, useState } from "react";
 
 import PropTypes from "prop-types";
+import { twJoin } from "tailwind-merge";
 
 const InputIcon = forwardRef(
   (
@@ -23,48 +24,88 @@ const InputIcon = forwardRef(
     return (
       <div className="flex w-full flex-col gap-1">
         <div className="relative flex w-full flex-col items-center justify-center">
-          <input
-            id={id}
-            type={type}
-            ref={ref}
-            required={required}
-            min={min}
-            max={max}
-            placeholder={placeholder}
-            className={`peer h-full w-full rounded-md border-2 ${
-              isValid ? "border-primary/25" : "border-danger-600"
-            } bg-transparent px-3 py-2 outline-none transition duration-300 placeholder:text-transparent ${
-              isValid ? "focus:border-primary/50" : "focus:border-danger-600"
-            }`}
-            onChange={(e) => {
-              onErrorChange({ id: e.target.id, error: "" });
+          {type === "textarea" ? (
+            <textarea
+              id={id}
+              ref={ref}
+              rows={3}
+              required={required}
+              placeholder={placeholder}
+              className={twJoin(
+                "peer h-full w-full resize-none rounded-md border-2 bg-transparent px-3 py-2 outline-none transition duration-300 placeholder:text-transparent",
+                isValid
+                  ? "border-primary/25 focus:border-primary/50"
+                  : "border-danger-600 focus:border-danger-600",
+              )}
+              onChange={(e) => {
+                onErrorChange({ id: e.target.id, error: "" });
 
-              if (!e.target.value) {
+                if (!e.target.value) {
+                  setError(false);
+                  setIsValid(true);
+                  return;
+                }
+                if (!validate) return;
+
+                const message = validate(e.target.value);
+                if (message) {
+                  onErrorChange({ id: e.target.id, error: message });
+                  setError(message);
+                  setIsValid(false);
+                  return;
+                }
+
                 setError(false);
                 setIsValid(true);
-                return;
-              }
-              if (!validate) return;
+              }}
+            ></textarea>
+          ) : (
+            <input
+              id={id}
+              type={type}
+              ref={ref}
+              required={required}
+              min={min}
+              max={max}
+              placeholder={placeholder}
+              className={twJoin(
+                "peer h-full w-full rounded-md border-2 bg-transparent px-3 py-2 outline-none transition duration-300 placeholder:text-transparent",
+                isValid
+                  ? "border-primary/25 focus:border-primary/50"
+                  : "border-danger-600 focus:border-danger-600",
+              )}
+              onChange={(e) => {
+                onErrorChange({ id: e.target.id, error: "" });
 
-              const message = validate(e.target.value);
-              if (message) {
-                onErrorChange({ id: e.target.id, error: message });
-                setError(message);
-                setIsValid(false);
-                return;
-              }
+                if (!e.target.value) {
+                  setError(false);
+                  setIsValid(true);
+                  return;
+                }
+                if (!validate) return;
 
-              setError(false);
-              setIsValid(true);
-            }}
-          />
+                const message = validate(e.target.value);
+                if (message) {
+                  onErrorChange({ id: e.target.id, error: message });
+                  setError(message);
+                  setIsValid(false);
+                  return;
+                }
+
+                setError(false);
+                setIsValid(true);
+              }}
+            />
+          )}
+
           <label
             htmlFor={id}
-            className={`bg-light absolute left-2 z-20 m-auto flex h-2 -translate-y-5 items-center gap-1 px-1 ${
-              isValid ? "text-dark" : "text-danger-600"
-            } transition duration-300 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5 ${
-              isValid ? "peer-focus:text-dark" : "peer-focus:text-danger-600"
-            }`}
+            className={twJoin(
+              "before:bg-light absolute left-2 top-0.5 isolate z-20 m-auto flex origin-left -translate-y-5 scale-90 items-center gap-1 px-1 py-2 transition duration-300 before:absolute before:left-0 before:right-0 before:-z-10 before:h-2 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-5 peer-focus:scale-90",
+              isValid
+                ? "text-dark peer-focus:text-dark"
+                : "text-danger-600 peer-focus:text-danger-600",
+            )}
           >
             {icon}
             {placeholder}

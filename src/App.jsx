@@ -1,4 +1,4 @@
-import { Home, Login } from "@/views";
+import { Home, Login, New } from "@/views";
 import { Route, Routes } from "react-router-dom";
 
 import { Topbar } from "@/components";
@@ -11,6 +11,7 @@ export default function App() {
       <main className="no-scrollbar container mx-auto flex-auto flex-col overflow-auto px-6 pt-4">
         <Routes>
           <Route index element={<Home />} />
+          <Route path="/new" element={<New />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>

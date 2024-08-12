@@ -15,6 +15,7 @@ export default function Login() {
     // TODO: show error message with toast
     console.log(error);
   }
+
   function handleSubmit() {
     // TODO: handle form submission
   }

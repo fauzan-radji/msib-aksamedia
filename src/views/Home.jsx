@@ -33,7 +33,7 @@ export default function Home() {
 
       <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
         <SecondaryButton size="small">
-          <PlusIcon className="h-5 w-5" /> Add Note
+          <PlusIcon className="h-5 w-5" /> New Note
         </SecondaryButton>
 
         {notesToShow.length > 0 && (
