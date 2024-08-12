@@ -7,22 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        neutral: "#ffffff",
-        complimentary: "#fcd7a5",
-        complimentaryDark: "#8A6432",
-        accent: "#eb4f47",
-        neutralContrast: "#111133",
-        complimentaryContrast: "#111133",
-        accentContrast: "#ffffff",
-
-        // dark
-        // neutral: "#111133",
-        // complimentary: "#fcd7a5",
-        // complimentaryDark: "#8A6432",
-        // accent: "#eb4f47",
-        // neutralContrast: "#ffffff",
-        // complimentaryContrast: "#111133",
-        // accentContrast: "#ffffff",
+        light: "#e5e7eb",
+        dark: "#343a40",
+        primary: "#023047",
+        secondary: "#FB8500",
+        primaryContrast: "#f8f9fa",
+        secondaryContrast: "#f8f9fa",
 
         white: "#ffffff",
         black: "#111133",

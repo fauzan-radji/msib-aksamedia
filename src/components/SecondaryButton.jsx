@@ -2,7 +2,7 @@ import Button from "./Button";
 import PropTypes from "prop-types";
 import { twMerge } from "tailwind-merge";
 
-export default function PrimaryButton({
+export default function SecondaryButton({
   children,
   className,
   onClick,
@@ -14,14 +14,14 @@ export default function PrimaryButton({
       onClick={onClick}
       size={size}
       disabled={disabled}
-      className={twMerge("bg-primary text-primaryContrast", className)}
+      className={twMerge("bg-secondary text-secondaryContrast", className)}
     >
       {children}
     </Button>
   );
 }
 
-PrimaryButton.propTypes = {
+SecondaryButton.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   onClick: PropTypes.func,

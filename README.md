@@ -33,7 +33,7 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]][live-preview] -->
 
-This is a test for Front-End Web Developer Intern position at Aksamedia. The test is to create a simple CRUD web page using React.js and Tailwind CSS. The test is based on this [notion-document]. There's no specific requirement for CRUD data, so I decided to use a simple list of movies.
+This is a test for Front-End Web Developer Intern position at Aksamedia. The test is to create a simple CRUD web page using React.js and Tailwind CSS. The test is based on this [notion-document]. There's no specific requirement for CRUD data, so I decided to use a simple list of notes.
 
 <p align="right"><a href="#table-of-contents">⬆️ Back to table of contents</a></p>
 
@@ -41,10 +41,10 @@ This is a test for Front-End Web Developer Intern position at Aksamedia. The tes
 
 - [ ] Login/Logout
 - [ ] Update profile
-- [ ] Create movie
-- [ ] Read and search movies
-- [ ] Update movies
-- [ ] Delete movies
+- [ ] Create note
+- [ ] Read and search notes
+- [ ] Update note
+- [ ] Delete note
 - [ ] Light/Dark mode
 
 <p align="right"><a href="#table-of-contents">⬆️ Back to table of contents</a></p>

@@ -20,7 +20,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex h-svh flex-col items-center justify-center px-6 py-4">
+    <div className="flex h-full flex-col items-center justify-center px-6 py-4">
       <Header>Login</Header>
       <form
         onSubmit={handleSubmit}
