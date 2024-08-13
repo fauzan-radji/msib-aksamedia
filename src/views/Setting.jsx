@@ -1,21 +1,8 @@
 import { Header } from "@/components";
-import { useEffect } from "react";
-import { useLocalStorage } from "@/hooks";
+import { useSettings } from "@/context";
 
 export default function Setting() {
-  const [theme, setTheme] = useLocalStorage("theme", "light");
-
-  useEffect(() => {
-    if (
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, [theme]);
+  const { theme, setTheme } = useSettings();
 
   return (
     <div className="flex flex-col">
@@ -28,6 +15,7 @@ export default function Setting() {
             id="light"
             className="peer hidden"
             onChange={() => setTheme("light")}
+            defaultChecked={theme === "light"}
           />
           <label
             htmlFor="light"
@@ -44,6 +32,7 @@ export default function Setting() {
             id="dark"
             className="peer hidden"
             onChange={() => setTheme("dark")}
+            defaultChecked={theme === "dark"}
           />
           <label
             htmlFor="dark"
@@ -60,7 +49,7 @@ export default function Setting() {
             id="system"
             className="peer hidden"
             onChange={() => setTheme("system")}
-            defaultChecked
+            defaultChecked={theme === "system"}
           />
           <label
             htmlFor="system"
