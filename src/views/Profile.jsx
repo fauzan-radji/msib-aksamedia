@@ -19,7 +19,7 @@ export default function Profile() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-4 flex w-full max-w-md flex-col items-center justify-center gap-4 pb-4"
+      className="mx-auto mt-4 flex w-full max-w-md flex-col items-center justify-center gap-4 pb-4"
     >
       <Input
         required

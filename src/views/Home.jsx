@@ -1,9 +1,10 @@
 import { Card, Pagination, SecondaryButton } from "@/components";
+import { Link, Navigate } from "react-router-dom";
 import { MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useMemo, useState } from "react";
 
-import { Navigate } from "react-router-dom";
 import { useAuth } from "@/context";
+import { useLocalStorage } from "@/hooks";
 
 const perPage = 12;
 
@@ -15,7 +16,7 @@ export default function Home() {
     console.log(event.target.value);
   }
 
-  const [notes] = useState([]);
+  const [notes] = useLocalStorage("notes", []);
   const totalPages = Math.ceil(notes.length / perPage);
   const [page, setPage] = useState(1);
   const notesToShow = useMemo(() => {
@@ -39,7 +40,7 @@ export default function Home() {
       </form>
 
       <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
-        <SecondaryButton size="small">
+        <SecondaryButton as={Link} to="/new" size="small">
           <PlusIcon className="h-5 w-5" /> New Note
         </SecondaryButton>
 

@@ -34,8 +34,12 @@ export default function Login() {
   if (isLoggedIn) return <Navigate to="/" replace={true} />;
 
   return (
-    <div className="flex h-full flex-col items-center justify-center px-6 py-4">
-      <AlertContainer alerts={alerts} dispatch={alertsDispatch} />
+    <div className="relative flex h-full flex-col items-center px-6 py-4">
+      <AlertContainer
+        alerts={alerts}
+        dispatch={alertsDispatch}
+        className="absolute left-0 right-0 top-0 z-30"
+      />
 
       <Header>Login</Header>
       <form

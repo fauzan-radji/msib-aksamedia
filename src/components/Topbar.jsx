@@ -1,17 +1,28 @@
 import { ArrowLeftIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { Link, useLocation } from "react-router-dom";
 
 import PropTypes from "prop-types";
+import { twJoin } from "tailwind-merge";
 import { useAuth } from "@/context";
 
 export default function Topbar({ title }) {
   const { user } = useAuth();
+  const { pathname } = useLocation();
 
   return (
     <header className="bg-primary text-primaryContrast">
       <div className="container mx-auto flex items-center justify-between px-2">
-        <div className="pointer-events-none aspect-square p-4 opacity-0">
+        <Link
+          to="/"
+          className={twJoin(
+            "text-secondary aspect-square p-4",
+            pathname !== "/login" && pathname !== "/"
+              ? ""
+              : "pointer-events-none opacity-0",
+          )}
+        >
           <ArrowLeftIcon className="h-6 w-6" />
-        </div>
+        </Link>
         <h1 className="p-4 text-xl font-bold">{title}</h1>
         <div className="aspect-square cursor-pointer p-4">
           {user ? (
