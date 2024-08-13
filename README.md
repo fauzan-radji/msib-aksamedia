@@ -42,7 +42,7 @@ This is a test for Front-End Web Developer Intern position at Aksamedia. The tes
 - [x] Login/Logout
 - [ ] Update profile
 - [x] Create note
-- [ ] Read and search notes
+- [x] Read and search notes
 - [x] Update note
 - [x] Delete note
 - [ ] Light/Dark mode

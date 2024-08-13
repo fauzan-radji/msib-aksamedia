@@ -1,29 +1,50 @@
 import { Card, Pagination, SecondaryButton } from "@/components";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useMemo, useState } from "react";
 
 import { useAuth } from "@/context";
 import { useLocalStorage } from "@/hooks";
+import { useMemo } from "react";
 
 const perPage = 12;
 
 export default function Home() {
   const { isLoggedIn } = useAuth();
-
-  function handleChange(event) {
-    // TODO: filter notes
-    console.log(event.target.value);
-  }
+  const [searchParams, setSearchParams] = useSearchParams({ q: "", p: 1 });
+  const searchQuery = searchParams.get("q") || "";
+  const page = +(searchParams.get("p") || 1);
 
   const [notes, setNotes] = useLocalStorage("notes", []);
-  const totalPages = Math.ceil(notes.length / perPage);
-  const [page, setPage] = useState(1);
+  const filteredNotes = useMemo(
+    () =>
+      notes.filter((note) =>
+        [note.title, note.content].some((haystack) =>
+          haystack.toLowerCase().includes(searchQuery.toLowerCase()),
+        ),
+      ),
+    [searchQuery, notes],
+  );
+  const totalPages = Math.ceil(filteredNotes.length / perPage);
   const notesToShow = useMemo(() => {
     const start = (page - 1) * perPage;
     const end = start + perPage;
-    return notes.slice(start, end);
-  }, [page, notes]);
+    return filteredNotes.slice(start, end);
+  }, [page, filteredNotes]);
+
+  function setPage(page) {
+    setSearchParams({
+      p: page,
+      q: searchQuery,
+    });
+  }
+
+  function handleChange(e) {
+    e.preventDefault();
+    setSearchParams({
+      p: page,
+      q: e.target.value,
+    });
+  }
 
   if (!isLoggedIn) return <Navigate to="/login" replace={true} />;
 
@@ -33,6 +54,7 @@ export default function Home() {
         <input
           type="search"
           placeholder="Search movies..."
+          value={searchQuery}
           onChange={handleChange}
           className="w-full bg-transparent outline-none placeholder:text-dark/50"
         />
@@ -61,7 +83,10 @@ export default function Home() {
               key={note.id}
               note={note}
               deleteNote={(id) => {
-                setNotes((prev) => prev.filter((note) => note.id !== id));
+                const sure = confirm("Are you sure?");
+                if (sure) {
+                  setNotes((prev) => prev.filter((note) => note.id !== id));
+                }
               }}
             />
           ))}
