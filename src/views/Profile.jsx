@@ -1,17 +1,28 @@
 import { BookmarkSquareIcon, UserIcon } from "@heroicons/react/24/outline";
 import { Input, PrimaryButton } from "@/components";
+import { Navigate, useNavigate } from "react-router-dom";
 
-import { Navigate } from "react-router-dom";
 import { useAuth } from "@/context";
+import { useLocalStorage } from "@/hooks";
 import { useRef } from "react";
 
 export default function Profile() {
   const { isLoggedIn } = useAuth();
+  const [user, setUser] = useLocalStorage("user", null);
+  const navigate = useNavigate();
   const nameInput = useRef();
   const usernameInput = useRef();
 
-  function handleSubmit() {
-    // TODO: save user
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    setUser((prev) => ({
+      ...prev,
+      name: nameInput.current.value,
+      username: usernameInput.current.value,
+    }));
+
+    navigate("/");
   }
 
   if (!isLoggedIn) return <Navigate to="/login" replace={true} />;
@@ -26,6 +37,7 @@ export default function Profile() {
         ref={nameInput}
         type="text"
         placeholder="Name"
+        value={user?.name}
         validate={(value) => {
           if (value.length < 3)
             return "Name must be at least 3 characters long";
@@ -41,6 +53,7 @@ export default function Profile() {
         ref={usernameInput}
         type="text"
         placeholder="Username"
+        value={user?.username}
         validate={(value) => {
           if (value.length < 3)
             return "Username must be at least 3 characters long";
