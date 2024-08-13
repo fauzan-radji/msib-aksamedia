@@ -3,12 +3,10 @@ import { Input, PrimaryButton } from "@/components";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import { useAuth } from "@/context";
-import { useLocalStorage } from "@/hooks";
 import { useRef } from "react";
 
 export default function Profile() {
-  const { isLoggedIn } = useAuth();
-  const [user, setUser] = useLocalStorage("user", null);
+  const { user, isLoggedIn, updateUser } = useAuth();
   const navigate = useNavigate();
   const nameInput = useRef();
   const usernameInput = useRef();
@@ -16,11 +14,10 @@ export default function Profile() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    setUser((prev) => ({
-      ...prev,
+    updateUser({
       name: nameInput.current.value,
       username: usernameInput.current.value,
-    }));
+    });
 
     navigate("/");
   }
