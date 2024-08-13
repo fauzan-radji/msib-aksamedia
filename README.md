@@ -39,12 +39,12 @@ This is a test for Front-End Web Developer Intern position at Aksamedia. The tes
 
 ## Features
 
-- [ ] Login/Logout
+- [x] Login/Logout
 - [ ] Update profile
 - [x] Create note
 - [ ] Read and search notes
 - [x] Update note
-- [ ] Delete note
+- [x] Delete note
 - [ ] Light/Dark mode
 
 <p align="right"><a href="#table-of-contents">⬆️ Back to table of contents</a></p>

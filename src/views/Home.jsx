@@ -16,7 +16,7 @@ export default function Home() {
     console.log(event.target.value);
   }
 
-  const [notes] = useLocalStorage("notes", []);
+  const [notes, setNotes] = useLocalStorage("notes", []);
   const totalPages = Math.ceil(notes.length / perPage);
   const [page, setPage] = useState(1);
   const notesToShow = useMemo(() => {
@@ -29,14 +29,14 @@ export default function Home() {
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <form className="bg-primary/10 text-dark flex items-center gap-2 rounded-md px-4 py-2">
+      <form className="flex items-center gap-2 rounded-md bg-primary/10 px-4 py-2 text-dark">
         <input
           type="search"
           placeholder="Search movies..."
           onChange={handleChange}
-          className="placeholder:text-dark/50 w-full bg-transparent outline-none"
+          className="w-full bg-transparent outline-none placeholder:text-dark/50"
         />
-        <MagnifyingGlassIcon className="text-secondary h-5 w-5" />
+        <MagnifyingGlassIcon className="h-5 w-5 text-secondary" />
       </form>
 
       <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
@@ -57,7 +57,13 @@ export default function Home() {
       {notesToShow.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 pb-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
           {notesToShow.map((note) => (
-            <Card key={note.id} note={note} />
+            <Card
+              key={note.id}
+              note={note}
+              deleteNote={(id) => {
+                setNotes((prev) => prev.filter((note) => note.id !== id));
+              }}
+            />
           ))}
         </div>
       ) : (
