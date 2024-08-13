@@ -50,13 +50,13 @@ export default function Home() {
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <form className="flex items-center gap-2 rounded-md bg-primary/10 px-4 py-2 text-dark">
+      <form className="flex items-center gap-2 rounded-md bg-primary/10 px-4 py-2 text-dark dark:bg-primaryContrast/30 dark:text-light">
         <input
           type="search"
           placeholder="Search movies..."
           value={searchQuery}
           onChange={handleChange}
-          className="w-full bg-transparent outline-none placeholder:text-dark/50"
+          className="w-full bg-transparent outline-none placeholder:text-dark/50 dark:placeholder:text-light/70"
         />
         <MagnifyingGlassIcon className="h-5 w-5 text-secondary" />
       </form>

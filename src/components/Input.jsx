@@ -36,7 +36,7 @@ const InputIcon = forwardRef(
               className={twJoin(
                 "peer h-full w-full resize-none rounded-md border-2 bg-transparent px-3 py-2 outline-none transition duration-300 placeholder:text-transparent",
                 isValid
-                  ? "border-primary/25 focus:border-primary/50"
+                  ? "border-secondary/50 focus:border-secondary"
                   : "border-danger-600 focus:border-danger-600",
               )}
               onChange={(e) => {
@@ -74,7 +74,7 @@ const InputIcon = forwardRef(
               className={twJoin(
                 "peer h-full w-full rounded-md border-2 bg-transparent px-3 py-2 outline-none transition duration-300 placeholder:text-transparent",
                 isValid
-                  ? "border-primary/25 focus:border-primary/50"
+                  ? "border-secondary/50 focus:border-secondary"
                   : "border-danger-600 focus:border-danger-600",
               )}
               onChange={(e) => {
@@ -104,9 +104,9 @@ const InputIcon = forwardRef(
           <label
             htmlFor={id}
             className={twJoin(
-              "before:bg-light absolute left-2 top-0.5 isolate z-20 m-auto flex origin-left -translate-y-5 scale-90 items-center gap-1 px-1 py-2 transition duration-300 before:absolute before:left-0 before:right-0 before:-z-10 before:h-2 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-5 peer-focus:scale-90",
+              "absolute left-2 top-0.5 isolate z-20 m-auto flex origin-left -translate-y-5 scale-90 items-center gap-1 px-1 py-2 transition duration-300 before:absolute before:left-0 before:right-0 before:-z-10 before:h-2 before:bg-light peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-5 peer-focus:scale-90 dark:before:bg-dark",
               isValid
-                ? "text-dark peer-focus:text-dark"
+                ? "text-dark peer-focus:text-dark dark:text-light dark:peer-focus:text-light"
                 : "text-danger-600 peer-focus:text-danger-600",
             )}
           >

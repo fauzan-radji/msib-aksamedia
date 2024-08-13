@@ -45,7 +45,7 @@ This is a test for Front-End Web Developer Intern position at Aksamedia. The tes
 - [x] Read and search notes
 - [x] Update note
 - [x] Delete note
-- [ ] Light/Dark mode
+- [x] Light/Dark mode
 
 <p align="right"><a href="#table-of-contents">⬆️ Back to table of contents</a></p>
 

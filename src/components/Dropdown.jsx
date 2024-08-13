@@ -20,7 +20,7 @@ export default function Dropdown({
     >
       <ul
         className={twMerge(
-          "pointer-events-none absolute isolate flex -translate-x-1/2 translate-y-0 list-none flex-col rounded-md bg-white text-dark opacity-0 shadow-md transition duration-300",
+          "pointer-events-none absolute isolate flex -translate-x-1/2 translate-y-0 list-none flex-col rounded-md bg-white text-dark opacity-0 shadow-md transition duration-300 dark:bg-black dark:text-light",
           show && "pointer-events-auto translate-y-2 opacity-100",
         )}
         style={{

@@ -57,13 +57,15 @@ export default function Topbar({ title }) {
           position={dropdownPosition}
           show={showDropdown}
           setShow={setShowDropdown}
-          title={user ? `Hello, ${user.name}` : ""}
+          title={user ? `Hello, ${user.name.split(" ")[0]}` : ""}
           options={[
             {
               id: "setting",
               text: "Setting",
               icon: Cog6ToothIcon,
-              action: () => {},
+              action: () => {
+                navigate("/setting");
+              },
             },
             ...(user
               ? [

@@ -7,7 +7,7 @@ export default function Card({ note, deleteNote, className }) {
   return (
     <div
       className={twMerge(
-        "relative w-full cursor-pointer rounded-md bg-white hover:bg-white/50",
+        "relative w-full cursor-pointer rounded-md bg-white hover:bg-white/50 dark:bg-black dark:hover:bg-black/50",
         className,
       )}
     >
