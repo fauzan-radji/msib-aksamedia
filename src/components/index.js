@@ -12,3 +12,4 @@ export { default as SuccessAlert } from "./SuccessAlert";
 export { default as WarningAlert } from "./WarningAlert";
 export { default as AlertContainer } from "./AlertContainer";
 export { default as NoteForm } from "./NoteForm";
+export { default as Dropdown } from "./Dropdown";

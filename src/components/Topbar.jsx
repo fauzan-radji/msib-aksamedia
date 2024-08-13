@@ -1,21 +1,31 @@
-import { ArrowLeftIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
-import { Link, useLocation } from "react-router-dom";
+import {
+  ArrowLeftIcon,
+  ArrowRightStartOnRectangleIcon,
+  Cog6ToothIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import Dropdown from "./Dropdown";
 import PropTypes from "prop-types";
 import { twJoin } from "tailwind-merge";
 import { useAuth } from "@/context";
+import { useState } from "react";
 
 export default function Topbar({ title }) {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { pathname } = useLocation();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ x: 0, y: 0 });
+  const navigate = useNavigate();
 
   return (
     <header className="bg-primary text-primaryContrast">
-      <div className="container mx-auto flex items-center justify-between px-2">
+      <div className="container relative mx-auto flex items-center justify-between px-2">
         <Link
           to="/"
           className={twJoin(
-            "text-secondary aspect-square p-4",
+            "aspect-square p-4 text-secondary",
             pathname !== "/login" && pathname !== "/"
               ? ""
               : "pointer-events-none opacity-0",
@@ -24,18 +34,57 @@ export default function Topbar({ title }) {
           <ArrowLeftIcon className="h-6 w-6" />
         </Link>
         <h1 className="p-4 text-xl font-bold">{title}</h1>
-        <div className="aspect-square cursor-pointer p-4">
+        <div
+          className="aspect-square cursor-pointer p-4"
+          onClick={(e) => {
+            setDropdownPosition({ x: e.clientX, y: e.clientY });
+            setShowDropdown((prev) => !prev);
+          }}
+        >
           {user ? (
             <span
-              className="bg-secondary text-secondaryContrast flex h-6 w-6 items-center justify-center rounded-full font-bold uppercase"
+              className="flex h-6 w-6 items-center justify-center rounded-full bg-secondary font-bold uppercase text-secondaryContrast"
               title={user.name}
             >
               {user.name[0]}
             </span>
           ) : (
-            <Cog6ToothIcon className="text-secondary h-6 w-6" />
+            <Cog6ToothIcon className="h-6 w-6 text-secondary" />
           )}
         </div>
+
+        <Dropdown
+          position={dropdownPosition}
+          show={showDropdown}
+          setShow={setShowDropdown}
+          title={user ? `Hello, ${user.name}` : ""}
+          options={[
+            {
+              id: "setting",
+              text: "Setting",
+              icon: Cog6ToothIcon,
+              action: () => {},
+            },
+            ...(user
+              ? [
+                  {
+                    id: "profile",
+                    text: "Profile",
+                    icon: UserIcon,
+                    action: () => {
+                      navigate("/profile");
+                    },
+                  },
+                  {
+                    id: "logout",
+                    text: "Logout",
+                    icon: ArrowRightStartOnRectangleIcon,
+                    action: logout,
+                  },
+                ]
+              : []),
+          ]}
+        />
       </div>
     </header>
   );
