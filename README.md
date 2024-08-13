@@ -83,6 +83,14 @@ This is a test for Front-End Web Developer Intern position at Aksamedia. The tes
 
 5. You can also see the live preview [here][live-preview]
 
+   You can use the following accounts to log in:
+
+   | Name         | Username | Password |
+   | ------------ | -------- | -------- |
+   | Fauzan Radji | fauzan   | 12345678 |
+   | John Doe     | john     | 12345678 |
+   | Bruce Wayne  | bruce    | 12345678 |
+
 <p align="right"><a href="#table-of-contents">⬆️ Back to table of contents</a></p>
 
 ## Contributing
