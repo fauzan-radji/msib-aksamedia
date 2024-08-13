@@ -57,9 +57,7 @@ export default function Home() {
       {notesToShow.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 pb-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
           {notesToShow.map((note) => (
-            <Card key={note.id} title={note.title}>
-              {note.content}
-            </Card>
+            <Card key={note.id} note={note} />
           ))}
         </div>
       ) : (

@@ -14,6 +14,7 @@ const InputIcon = forwardRef(
       min = "",
       validate = () => ({ isError: false, message: "" }),
       onErrorChange = () => {},
+      value = "",
     },
     ref,
   ) => {
@@ -31,6 +32,7 @@ const InputIcon = forwardRef(
               rows={3}
               required={required}
               placeholder={placeholder}
+              defaultValue={value}
               className={twJoin(
                 "peer h-full w-full resize-none rounded-md border-2 bg-transparent px-3 py-2 outline-none transition duration-300 placeholder:text-transparent",
                 isValid
@@ -68,6 +70,7 @@ const InputIcon = forwardRef(
               min={min}
               max={max}
               placeholder={placeholder}
+              defaultValue={value}
               className={twJoin(
                 "peer h-full w-full rounded-md border-2 bg-transparent px-3 py-2 outline-none transition duration-300 placeholder:text-transparent",
                 isValid
@@ -128,6 +131,7 @@ InputIcon.propTypes = {
   max: PropTypes.string,
   validate: PropTypes.func,
   onErrorChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 export default InputIcon;
